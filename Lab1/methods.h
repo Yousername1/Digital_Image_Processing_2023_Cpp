@@ -8,6 +8,8 @@ using namespace cv;
 using namespace std;
 
 Mat getHist(const Mat &image);
+Mat getHistColor(const Mat& image);
+Mat doQuantization(const Mat& image, int q_level);
 
 
 
