@@ -12,7 +12,7 @@ using namespace std;
 Mat getHist(const Mat &image);
 Mat getHistColor(const Mat& image);
 Mat doQuantization(const Mat& image, int q_level);
-double errorCalculation(int Y, int Y_quanti, int rowS, int colS);
+void errorCalculation(int Y, int Y_quanti, int rowS, int colS, int num_level);
 
 
 

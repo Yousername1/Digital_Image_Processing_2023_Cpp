@@ -11,7 +11,21 @@ int main()
 
     imshow("Hist", getHist(imageGray));
 
-    imshow("Quantization", doQuantization(imageGray, 16));
+    int i = 2;
+    string i_title;
+	//int power = 1;
+	//while (power <= 6) {
+	//	imshow("Quantization" + i, doQuantization(imageGray, i));
+	//	i = pow(i, power + 1);
+	//}
+
+    for (int power = 1; power <= 6; power++) {
+        i = pow(2, power);
+        i_title = to_string(i);
+        imshow(i_title, doQuantization(imageGray, i));
+    }
+    
+    //imshow("Quantization", doQuantization(imageGray, 16));
 
     waitKey();
 

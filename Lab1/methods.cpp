@@ -25,12 +25,6 @@ Mat getHist(const Mat &image)
 		}
 	}
 
-	//double scaleUpX = 1.2;
-	//double scaleUpY = 1.2;
-	//double scaleDown = 0.6;
-	//Mat scaled_f_up, scaled_f_down;
-	//resize(histImg, scaled_f_up, Size(), scaleUpX, scaleUpY, INTER_LINEAR);
-
 	bitwise_not(histImg, histImg);
 
 	return histImg;
@@ -89,7 +83,8 @@ Mat doQuantization(const Mat& image, int q_level)
 	}
 
 	imshow("Hist for quanti", getHist(resultImage));
-	errorCalculation(Y, Y_quanti, resultImage.rows, resultImage.cols, q_level);
+	//errorCalculation(Y, Y_quanti, resultImage.rows, resultImage.cols, q_level);
 
 	return resultImage;
 }
+
