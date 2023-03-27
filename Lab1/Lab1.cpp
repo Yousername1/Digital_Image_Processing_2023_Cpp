@@ -11,19 +11,19 @@ int main()
 
     //imshow("Hist", getHist(imageGray));
 
-    Mat imageTemp = doQuantization(imageGray, 2);
-    imshow("2", imageTemp);
-    imshow("2", getHist(imageTemp));  
+    //Mat imageTemp = doQuantization(imageGray, 2);
+    //imshow("2", imageTemp);
+    //imshow("2", getHist(imageTemp));  
 
 
 
-    //string i_title;
-    //Mat imageTemp;
-    //for (int power = 1; power <= 6; power++) {
-    //    int i = pow(2, power);
-    //    i_title = to_string(i);
-    //    imshow(i_title, doQuantization(imageGray, i));
-    //}
+    string i_title;
+    Mat imageTemp;
+    for (int power = 1; power <= 6; power++) {
+        int i = pow(2, power);
+        i_title = to_string(i);
+        imshow(i_title, doQuantization(imageGray, i));
+    }
     
     //imshow("8", doQuantization(imageGray, 8));
 

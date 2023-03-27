@@ -83,7 +83,7 @@ Mat doQuantization(const Mat& image, int q_level)
 	}
 
 	string hist_title = to_string(q_level);
-	imshow(hist_title, getHist(resultImage));
+	imshow(hist_title + "Hist", getHist(resultImage));
 	//getHist(resultImage);
 	//errorCalculation(Y, Y_quanti, resultImage.rows, resultImage.cols, q_level);
 
