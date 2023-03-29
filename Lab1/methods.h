@@ -14,6 +14,8 @@ Mat getHist(const Mat &image);
 Mat getHistColor(const Mat& image);
 Mat doQuantization(const Mat& image, int q_level);
 double errorCalculation(double sum, const Mat& image);
+map<int, double> setRMStable(int key, double value);
+void getRMStable(map<int, double> RMStable);
 double estimationCalculation(int q_level);
 
 

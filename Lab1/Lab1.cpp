@@ -3,12 +3,13 @@
 int main()
 {
     Mat img = imread("../image.jpg"); //create container and recording file to it
-    //imshow("Showtest", img); //show original image
+    imshow("Showtest", img); //show original image
 
     Mat imageGray; //create new container
     cvtColor(img, imageGray, COLOR_RGB2GRAY); //8bit image to grayscale
-    //imshow("gray", imageGray); //show grayscale image
-    //imshow("Hist", getHist(imageGray)); //show histogram for grayscale image
+    imshow("gray", imageGray); //show grayscale image
+    imshow("Hist", getHist(imageGray)); //show histogram for grayscale image
+
 
     /*
     * Sequential quantization 
@@ -17,25 +18,22 @@ int main()
     */
     string level_title;
     Mat imageTemp;
-    cout << "RMS error" << endl;
-    cout << "|" << setw(10) << "level" << setw(10) << "|" << setw(10) << "error" << setw(10) << "|" << endl;
     for (int power = 1; power <= 6; power++) {
         int level = pow(2, power);
         level_title = to_string(level);
-        imshow(level_title, doQuantization(imageGray, level));
-        //imageTemp = doQuantization(imageGray, level);
-        //imshow(level_title, imageTemp);
-
+        imageTemp = doQuantization(imageGray, level);
+        imshow(level_title, imageTemp);
+        imshow(level_title + "Hist", getHist(imageTemp));
     }
 
 
-    //cout << "Estimation of RMS error" << endl;
-    //cout << "|" << setw(10) << "level" << setw(10) << "|" << setw(10) << "estimation" << setw(10) << "|" << endl;
-    //for (int power = 1; power <= 6; power++) {
-    //    int level = pow(2, power);
-    //    level_title = to_string(level);
-    //    cout << "|" << setw(10) << level_title << setw(10) << "|" << setw(10) << estimationCalculation(level) << setw(10) << "|" << endl;
-    //}
+    cout << "Estimation of RMS error" << endl;
+    cout << "|" << setw(10) << "level" << setw(10) << "|" << setw(10) << "estimation" << setw(10) << "|" << endl;
+    for (int power = 1; power <= 6; power++) {
+        int level = pow(2, power);
+        level_title = to_string(level);
+        cout << "|" << setw(10) << level_title << setw(10) << "|" << setw(10) << estimationCalculation(level) << setw(10) << "|" << endl;
+    }
 
 
     waitKey();

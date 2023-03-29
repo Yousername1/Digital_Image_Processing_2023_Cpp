@@ -1,5 +1,6 @@
 #include "methods.h"
 
+
 Mat getHist(const Mat &image)
 {
 	Mat hist = Mat::zeros(1, 256, CV_64FC1);
@@ -44,7 +45,22 @@ double estimationCalculation(int q_level) {
 
 double errorCalculation(double sum, const Mat& image)
 {
-	return sum / (image.rows * image.cols);
+	return sqrt(sum / (image.rows * image.cols));
+}
+
+
+map<int, double> setRMStable(int key, double value) {
+	map<int, double> RMStable;
+	RMStable.insert({key, value});
+	return RMStable;
+}
+
+void getRMStable(map<int, double> RMStable) {
+	map <int, double> ::iterator it = RMStable.begin();
+	cout << "RMS error" << endl;
+	for (it; it != RMStable.end(); it++) {
+		cout << "level: " << it->first << "  error: " << it->second << endl;
+	}
 }
 
 
@@ -53,7 +69,8 @@ Mat doQuantization(const Mat& image, int q_level)
 {
 	Mat resultImage = Mat::zeros(image.rows, image.cols, CV_8UC1);
 	int Y = 0, Y_quanti = 0;
-	double sum = 0;
+	double sum = 0; 
+	double RMS = 0;
 
 	//q_level - number of quantization levels (2, 4 ... 64)
 	int range = 255 / (q_level - 1);
@@ -75,19 +92,26 @@ Mat doQuantization(const Mat& image, int q_level)
 			resultImage.at<uchar>(i, j) = Y_quanti;
 		}
 		sum += pow(Y - Y_quanti, 2);
-		cout << errorCalculation(sum, image) << endl;
 	}
 
-	//cout << errorCalculation(sum, image) << endl;
+	//while(q_level <= q_level)
+	//{
+	//	cout << "|" << setw(10) << to_string(q_level) << setw(10) << "|" << setw(10) << errorCalculation(sum, image) << setw(10) << "|" << endl;
+	//	break;
+	//}
 
-	string hist_title = to_string(q_level);
-	imshow(hist_title + "Hist", getHist(resultImage));
 
+	map<int, double> RMStable;
+	RMStable = setRMStable(q_level, errorCalculation(sum, image));
+	getRMStable(RMStable);
+	//while (q_level <= q_level) {
+	//	emptyTable = setRMStable(q_level, errorCalculation(sum, image));
+	//	break;
+	//}
 
-	//cout << "Estimation of RMS error" << endl;
-	//cout << "|" << setw(5) << "level" << setw(5) << "|" << setw(5) << "estimation" << setw(5) << "|" << endl;
-	//cout << "|" << setw(5) << to_string(q_level) << setw(5) << "|" << setw(5) << estimationCalculation(range) << setw(5) << "|" << endl;
-	//cout << "level: " << to_string(q_level) << ", estimation: " << estimationCalculation(range);
+	//string hist_title = to_string(q_level);
+	//imshow(hist_title + "Hist", getHist(resultImage));
+
 
 	return resultImage;
 }
