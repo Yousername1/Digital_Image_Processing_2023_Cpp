@@ -2,11 +2,11 @@
 
 int main()
 {
-    Mat img = imread("../image.jpg"); //create container and recording file to it
-    imshow("Showtest", img); //show original image
+    Mat img = imread("../image.jpg"); 
+    imshow("Showtest", img); 
 
-    Mat imageGray; //create new container
-    cvtColor(img, imageGray, COLOR_BGR2GRAY); //8bit image to grayscale
+    Mat imageGray; 
+    cvtColor(img, imageGray, COLOR_BGR2GRAY); 
     imshow("gray", imageGray); //show grayscale image
     imshow("Hist", getHist(imageGray)); //show histogram for grayscale image
 
@@ -18,6 +18,8 @@ int main()
     */
     string level_title;
     Mat imageTemp;
+    //cout << "RMS error" << endl; //This subheading can be here if we only want to see the error table (without opening images).
+    //cout << "|" << setw(10) << "level" << setw(10) << "|" << setw(10) << "error" << setw(10) << "|" << endl;
     for (int power = 1; power <= 6; power++) {
         int level = pow(2, power);
         level_title = to_string(level);
@@ -34,7 +36,6 @@ int main()
         level_title = to_string(level);
         cout << "|" << setw(10) << level_title << setw(10) << "|" << setw(10) << estimationCalculation(level) << setw(10) << "|" << endl;
     }
-
 
     waitKey();
 

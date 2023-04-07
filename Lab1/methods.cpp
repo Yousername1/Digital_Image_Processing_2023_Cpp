@@ -57,10 +57,15 @@ map<int, double> makeRMStable(int key, double value) {
 
 void getRMStable(map<int, double> RMStable) {
 	map <int, double> ::iterator it = RMStable.begin();
-	cout << "RMS error" << endl;
+	cout << "RMS error" << endl; // This subheading is here because the console 
+								// displays a lot of service information when opening images.
 	for (it; it != RMStable.end(); it++) {
 		cout << "level: " << it->first << "  error: " << it->second << endl;
 	}
+
+	//for (it; it != RMStable.end(); it++) {
+	//	cout << "|" << setw(10) << it->first << setw(10) << "|" << setw(10) << it->second << setw(10) << "|" << endl;
+	//}
 }
 
 
@@ -68,23 +73,17 @@ void getRMStable(map<int, double> RMStable) {
 Mat doQuantization(const Mat& image, int q_level)
 {
 	Mat resultImage = Mat::zeros(image.rows, image.cols, CV_8UC1);
-	Mat ret = image.clone();
 	int Y = 0, Y_quanti = 0;
 	double sum = 0; 
 	double RMS = 0;
 
 	//q_level - number of quantization levels (2, 4 ... 64)
 	int range = 255 / (q_level - 1);
-	
+
 	for (int i = 0; i <= image.rows - 1; i++) {
 		for (int j = 0; j <= image.cols - 1; j++) {
 			
 			Y = image.at<uchar>(i, j);
-
-			//if (Y > 255) {
-			//	Y = 255;
-			//	ret.at<uchar>(i, j) = Y;
-			//}
 
 			for (int level = 0; level <= q_level; level++) {
 				if (Y > range * level && Y <= range * level + range / 2) {
@@ -95,8 +94,6 @@ Mat doQuantization(const Mat& image, int q_level)
 				}
 			}
 
-			//Y_quanti = image.at<uchar>(i, j);
-
 			if (Y_quanti > 255)
 				Y_quanti = 255;
 
@@ -105,24 +102,10 @@ Mat doQuantization(const Mat& image, int q_level)
 		sum += pow(Y - Y_quanti, 2);
 	}
 
-	//while(q_level <= q_level)
-	//{
-	//	cout << "|" << setw(10) << to_string(q_level) << setw(10) << "|" << setw(10) << errorCalculation(sum, image) << setw(10) << "|" << endl;
-	//	break;
-	//}
-
-
+	//calculate RMSE
 	map<int, double> RMStable;
 	RMStable = makeRMStable(q_level, errorCalculation(sum, image));
 	getRMStable(RMStable);
-	//while (q_level <= q_level) {
-	//	emptyTable = setRMStable(q_level, errorCalculation(sum, image));
-	//	break;
-	//}
-
-	//string hist_title = to_string(q_level);
-	//imshow(hist_title + "Hist", getHist(resultImage));
-
 
 	return resultImage;
 }
