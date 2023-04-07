@@ -49,7 +49,7 @@ double errorCalculation(double sum, const Mat& image)
 }
 
 
-map<int, double> setRMStable(int key, double value) {
+map<int, double> makeRMStable(int key, double value) {
 	map<int, double> RMStable;
 	RMStable.insert({key, value});
 	return RMStable;
@@ -68,6 +68,7 @@ void getRMStable(map<int, double> RMStable) {
 Mat doQuantization(const Mat& image, int q_level)
 {
 	Mat resultImage = Mat::zeros(image.rows, image.cols, CV_8UC1);
+	Mat ret = image.clone();
 	int Y = 0, Y_quanti = 0;
 	double sum = 0; 
 	double RMS = 0;
@@ -80,7 +81,12 @@ Mat doQuantization(const Mat& image, int q_level)
 			
 			Y = image.at<uchar>(i, j);
 
-			for (int level = 0; level <= range; level++) {
+			//if (Y > 255) {
+			//	Y = 255;
+			//	ret.at<uchar>(i, j) = Y;
+			//}
+
+			for (int level = 0; level <= q_level; level++) {
 				if (Y > range * level && Y <= range * level + range / 2) {
 					Y_quanti = range * level;
 				}
@@ -88,6 +94,11 @@ Mat doQuantization(const Mat& image, int q_level)
 					Y_quanti = range * (level + 1);
 				}
 			}
+
+			//Y_quanti = image.at<uchar>(i, j);
+
+			if (Y_quanti > 255)
+				Y_quanti = 255;
 
 			resultImage.at<uchar>(i, j) = Y_quanti;
 		}
@@ -102,7 +113,7 @@ Mat doQuantization(const Mat& image, int q_level)
 
 
 	map<int, double> RMStable;
-	RMStable = setRMStable(q_level, errorCalculation(sum, image));
+	RMStable = makeRMStable(q_level, errorCalculation(sum, image));
 	getRMStable(RMStable);
 	//while (q_level <= q_level) {
 	//	emptyTable = setRMStable(q_level, errorCalculation(sum, image));

@@ -6,7 +6,7 @@ int main()
     imshow("Showtest", img); //show original image
 
     Mat imageGray; //create new container
-    cvtColor(img, imageGray, COLOR_RGB2GRAY); //8bit image to grayscale
+    cvtColor(img, imageGray, COLOR_BGR2GRAY); //8bit image to grayscale
     imshow("gray", imageGray); //show grayscale image
     imshow("Hist", getHist(imageGray)); //show histogram for grayscale image
 
