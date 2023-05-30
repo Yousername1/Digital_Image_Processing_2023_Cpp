@@ -73,17 +73,22 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::Label^ label9;
 	private: System::Windows::Forms::Label^ label10;
 	private: System::Windows::Forms::Label^ label11;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Button^ DrawBut;
+
+	private: System::Windows::Forms::Button^ TransfBut;
+
 	private: System::Windows::Forms::Splitter^ splitter1;
 	private: System::Windows::Forms::Splitter^ splitter2;
 	private: System::Windows::Forms::Label^ label12;
-	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Button^ ScaleBut;
+	private: System::Windows::Forms::Button^ CountBut;
+
+
 	private: System::Windows::Forms::TextBox^ angle;
 
 	private: System::Windows::Forms::Label^ label13;
-	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Button^ RotateBut;
+
 	private: System::Windows::Forms::Label^ label14;
 	private: System::Windows::Forms::TextBox^ textBox19;
 
@@ -122,16 +127,16 @@ namespace CppCLRWinFormsProject {
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->label11 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->DrawBut = (gcnew System::Windows::Forms::Button());
+			this->TransfBut = (gcnew System::Windows::Forms::Button());
 			this->splitter1 = (gcnew System::Windows::Forms::Splitter());
 			this->splitter2 = (gcnew System::Windows::Forms::Splitter());
 			this->label12 = (gcnew System::Windows::Forms::Label());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->ScaleBut = (gcnew System::Windows::Forms::Button());
+			this->CountBut = (gcnew System::Windows::Forms::Button());
 			this->angle = (gcnew System::Windows::Forms::TextBox());
 			this->label13 = (gcnew System::Windows::Forms::Label());
-			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->RotateBut = (gcnew System::Windows::Forms::Button());
 			this->label14 = (gcnew System::Windows::Forms::Label());
 			this->textBox19 = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -374,25 +379,25 @@ namespace CppCLRWinFormsProject {
 			this->label11->TabIndex = 29;
 			this->label11->Text = L"vertex3";
 			// 
-			// button1
+			// DrawBut
 			// 
-			this->button1->Location = System::Drawing::Point(874, 238);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 30;
-			this->button1->Text = L"OK";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			this->DrawBut->Location = System::Drawing::Point(874, 238);
+			this->DrawBut->Name = L"DrawBut";
+			this->DrawBut->Size = System::Drawing::Size(75, 23);
+			this->DrawBut->TabIndex = 30;
+			this->DrawBut->Text = L"OK";
+			this->DrawBut->UseVisualStyleBackColor = true;
+			this->DrawBut->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
 			// 
-			// button2
+			// TransfBut
 			// 
-			this->button2->Location = System::Drawing::Point(725, 498);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 23);
-			this->button2->TabIndex = 31;
-			this->button2->Text = L"Transfer";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
+			this->TransfBut->Location = System::Drawing::Point(725, 498);
+			this->TransfBut->Name = L"TransfBut";
+			this->TransfBut->Size = System::Drawing::Size(75, 23);
+			this->TransfBut->TabIndex = 31;
+			this->TransfBut->Text = L"Transfer";
+			this->TransfBut->UseVisualStyleBackColor = true;
+			this->TransfBut->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
 			// 
 			// splitter1
 			// 
@@ -419,25 +424,25 @@ namespace CppCLRWinFormsProject {
 			this->label12->TabIndex = 34;
 			this->label12->Text = L"625x490";
 			// 
-			// button3
+			// ScaleBut
 			// 
-			this->button3->Location = System::Drawing::Point(818, 498);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 23);
-			this->button3->TabIndex = 35;
-			this->button3->Text = L"Scale";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
+			this->ScaleBut->Location = System::Drawing::Point(818, 498);
+			this->ScaleBut->Name = L"ScaleBut";
+			this->ScaleBut->Size = System::Drawing::Size(75, 23);
+			this->ScaleBut->TabIndex = 35;
+			this->ScaleBut->Text = L"Scale";
+			this->ScaleBut->UseVisualStyleBackColor = true;
+			this->ScaleBut->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
 			// 
-			// button4
+			// CountBut
 			// 
-			this->button4->Location = System::Drawing::Point(668, 422);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(75, 23);
-			this->button4->TabIndex = 36;
-			this->button4->Text = L"Count";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
+			this->CountBut->Location = System::Drawing::Point(668, 422);
+			this->CountBut->Name = L"CountBut";
+			this->CountBut->Size = System::Drawing::Size(75, 23);
+			this->CountBut->TabIndex = 36;
+			this->CountBut->Text = L"Count";
+			this->CountBut->UseVisualStyleBackColor = true;
+			this->CountBut->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
 			// 
 			// angle
 			// 
@@ -455,14 +460,14 @@ namespace CppCLRWinFormsProject {
 			this->label13->TabIndex = 38;
 			this->label13->Text = L"Angle, deg:";
 			// 
-			// button5
+			// RotateBut
 			// 
-			this->button5->Location = System::Drawing::Point(909, 498);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(75, 23);
-			this->button5->TabIndex = 39;
-			this->button5->Text = L"Rotate";
-			this->button5->UseVisualStyleBackColor = true;
+			this->RotateBut->Location = System::Drawing::Point(909, 498);
+			this->RotateBut->Name = L"RotateBut";
+			this->RotateBut->Size = System::Drawing::Size(75, 23);
+			this->RotateBut->TabIndex = 39;
+			this->RotateBut->Text = L"Rotate";
+			this->RotateBut->UseVisualStyleBackColor = true;
 			// 
 			// label14
 			// 
@@ -488,16 +493,16 @@ namespace CppCLRWinFormsProject {
 			this->ClientSize = System::Drawing::Size(997, 749);
 			this->Controls->Add(this->textBox19);
 			this->Controls->Add(this->label14);
-			this->Controls->Add(this->button5);
+			this->Controls->Add(this->RotateBut);
 			this->Controls->Add(this->label13);
 			this->Controls->Add(this->angle);
-			this->Controls->Add(this->button4);
-			this->Controls->Add(this->button3);
+			this->Controls->Add(this->CountBut);
+			this->Controls->Add(this->ScaleBut);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->splitter2);
 			this->Controls->Add(this->splitter1);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->TransfBut);
+			this->Controls->Add(this->DrawBut);
 			this->Controls->Add(this->label11);
 			this->Controls->Add(this->label10);
 			this->Controls->Add(this->label9);
@@ -571,34 +576,18 @@ namespace CppCLRWinFormsProject {
 		}
 	}
 
-	private: System::Void hmgToDek(int numOfVertexA, int HMG[][DISMENTION], //double HMG...
+	private: System::Void hmgToDek(int numOfVertexA, int hmg[][DISMENTION], //double HMG...
 		int dekart[][DISMENTION - 1]) {
 
 		for (int i = 0; i < numOfVertexA; i++) {
-			double tmp = HMG[i][DISMENTION - 1];
+			double tmp = hmg[i][DISMENTION - 1];
 			if (tmp != 0) {
-				dekart[i][0] = HMG[i][0] / tmp;
-				dekart[i][1] = HMG[i][1] / tmp;
+				dekart[i][0] = hmg[i][0] / tmp;
+				dekart[i][1] = hmg[i][1] / tmp;
 			}
 			else System::Windows::Forms::MessageBox::Show("Replace zero values.");
 		}
 	}
-
-	private: System::Void hmgToDekExtend(int numOfVertexA, int HMG[][DISMENTION], //double HMG...
-		int HMG_REF[][DISMENTION], int dekart[][DISMENTION - 1], int dekartRef[][DISMENTION - 1]) {
-
-			for (int i = 0; i < numOfVertexA; i++) {
-				double tmp = HMG[i][DISMENTION - 1];
-				double tmp1 = HMG_REF[i][DISMENTION - 1];
-				if (tmp != 0 && tmp1 != 0) {
-					dekart[i][0] = HMG[i][0] / tmp;
-					dekart[i][1] = HMG[i][1] / tmp;
-					dekartRef[i][0] = HMG_REF[i][0] / tmp1;
-					dekartRef[i][1] = HMG_REF[i][1] / tmp1;
-				}
-				else System::Windows::Forms::MessageBox::Show("Replace zero values.");
-			}
-		}
 
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -620,45 +609,50 @@ namespace CppCLRWinFormsProject {
 			pictureBox1->Refresh();
 
 		}
+		else {
+			int xZero = 312;
+			int yZero = 245;
 
-		int xZero = 312;
-		int yZero = 245;
+			int length = Convert::ToInt32(textBox19->Text);
+			double yDelta = length / 2;
+			double xDelta = sqrt(3 * pow(length, 2) / 4);
 
-		int length = Convert::ToInt32(textBox19->Text);
-		double yDelta = length / 2;
-		double xDelta = sqrt(3 * pow(length, 2) / 4);
+			this->textBox1->Text = Convert::ToString(xZero);
+			this->textBox2->Text = Convert::ToString(yZero);
 
-		this->textBox1->Text = Convert::ToString(xZero);
-		this->textBox2->Text = Convert::ToString(yZero);
+			this->textBox4->Text = Convert::ToString(xZero - xDelta);
+			this->textBox5->Text = Convert::ToString(yZero - yDelta);
 
-		this->textBox4->Text = Convert::ToString(xZero - xDelta);
-		this->textBox5->Text = Convert::ToString(yZero - yDelta);
+			this->textBox7->Text = Convert::ToString(xZero + xDelta);
+			this->textBox8->Text = Convert::ToString(yZero + yDelta);
 
-		this->textBox7->Text = Convert::ToString(xZero + xDelta);
-		this->textBox8->Text = Convert::ToString(yZero + yDelta);
+			HMG_P[0][0] = xZero;
+			HMG_P[0][1] = yZero;
+			HMG_P[0][2] = Convert::ToInt32(textBox3->Text);
+			HMG_P[1][0] = xZero - xDelta;
+			HMG_P[1][1] = yZero - yDelta;
+			HMG_P[1][2] = Convert::ToInt32(textBox6->Text);
+			HMG_P[2][0] = xZero - xDelta;
+			HMG_P[2][1] = yZero + yDelta;
+			HMG_P[2][2] = Convert::ToInt32(textBox9->Text);
 
-		HMG_P[0][0] = xZero;
-		HMG_P[0][1] = yZero;
-		HMG_P[0][2] = Convert::ToInt32(textBox3->Text);
-		HMG_P[1][0] = xZero - xDelta;
-		HMG_P[1][1] = yZero - yDelta;
-		HMG_P[1][2] = Convert::ToInt32(textBox6->Text);
-		HMG_P[2][0] = xZero - xDelta;
-		HMG_P[2][1] = yZero + yDelta;
-		HMG_P[2][2] = Convert::ToInt32(textBox9->Text);
+			HMG_REFLECTION[0][0] = xZero;
+			HMG_REFLECTION[0][1] = yZero;
+			HMG_REFLECTION[0][2] = Convert::ToInt32(textBox3->Text);
+			HMG_REFLECTION[1][0] = xZero + xDelta;
+			HMG_REFLECTION[1][1] = yZero - yDelta;
+			HMG_REFLECTION[1][2] = Convert::ToInt32(textBox6->Text);
+			HMG_REFLECTION[2][0] = xZero + xDelta;
+			HMG_REFLECTION[2][1] = yZero + yDelta;
+			HMG_REFLECTION[2][2] = Convert::ToInt32(textBox9->Text);
 
-		HMG_REFLECTION[0][0] = xZero;
-		HMG_REFLECTION[0][1] = yZero;
-		HMG_REFLECTION[0][2] = Convert::ToInt32(textBox3->Text);
-		HMG_REFLECTION[1][0] = xZero + xDelta;
-		HMG_REFLECTION[1][1] = yZero - yDelta;
-		HMG_REFLECTION[1][2] = Convert::ToInt32(textBox6->Text);
-		HMG_REFLECTION[2][0] = xZero + xDelta;
-		HMG_REFLECTION[2][1] = yZero + yDelta;
-		HMG_REFLECTION[2][2] = Convert::ToInt32(textBox9->Text);
-
-		hmgToDekExtend(VERTNUM, HMG_P, HMG_REFLECTION, DEK_P, DEK_REF);
-		pictureBox1->Refresh();
+			hmgToDek(VERTNUM, HMG_P, DEK_P);
+			//this->pictureBox1->ResumeLayout(true);
+			//this->pictureBox1->PerformLayout();
+			hmgToDek(VERTNUM, HMG_REFLECTION, DEK_REF);
+			//this->pictureBox1->ResumeLayout(false);
+			pictureBox1->Refresh();
+		}
 		
 	}
 
@@ -666,30 +660,38 @@ namespace CppCLRWinFormsProject {
 	private: System::Void pictureBox1_Paint(System::Object^ sender, 
 		System::Windows::Forms::PaintEventArgs^ e) {
 
-		e->Graphics->DrawLine(System::Drawing::Pens::Red, DEK_P[0][0],
+		e->Graphics->DrawLine(System::Drawing::Pens::Black, DEK_P[0][0],
 			DEK_P[0][1], DEK_P[1][0], DEK_P[1][1]);
-		e->Graphics->DrawLine(System::Drawing::Pens::Red, DEK_P[1][0],
+		e->Graphics->DrawLine(System::Drawing::Pens::Black, DEK_P[1][0],
 			DEK_P[1][1], DEK_P[2][0], DEK_P[2][1]);
-		e->Graphics->DrawLine(System::Drawing::Pens::Red, DEK_P[2][0],
+		e->Graphics->DrawLine(System::Drawing::Pens::Black, DEK_P[2][0],
 			DEK_P[2][1], DEK_P[0][0], DEK_P[0][1]);
+
+		e->Graphics->DrawLine(System::Drawing::Pens::Black, DEK_REF[0][0],
+			DEK_REF[0][1], DEK_REF[1][0], DEK_REF[1][1]);
+		e->Graphics->DrawLine(System::Drawing::Pens::Black, DEK_REF[1][0],
+			DEK_REF[1][1], DEK_REF[2][0], DEK_REF[2][1]);
+		e->Graphics->DrawLine(System::Drawing::Pens::Black, DEK_REF[2][0],
+			DEK_REF[2][1], DEK_REF[0][0], DEK_REF[0][1]);
+
+
 	}
 
 
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		MATRIX_T[0][0] = Convert::ToInt32(textBox10->Text);
-		MATRIX_T[0][1] = Convert::ToInt32(textBox11->Text);
-		MATRIX_T[0][2] = Convert::ToInt32(textBox12->Text);
-		MATRIX_T[1][0] = Convert::ToInt32(textBox13->Text);
-		MATRIX_T[1][1] = Convert::ToInt32(textBox14->Text);
-		MATRIX_T[1][2] = Convert::ToInt32(textBox15->Text);
+		this->textBox10->Text = Convert::ToString(1);
+		this->textBox14->Text = Convert::ToString(1);
+
+		this->textBox11->Text = Convert::ToString(0);
+		this->textBox13->Text = Convert::ToString(0);
+
 		MATRIX_T[2][0] = Convert::ToInt32(textBox16->Text);
 		MATRIX_T[2][1] = Convert::ToInt32(textBox17->Text);
-		MATRIX_T[2][2] = Convert::ToInt32(textBox18->Text);
 
 		double Result[VERTNUM][DISMENTION] = { 0 }; // служебный массив для
 		//вычислений
-		matrix_mult(3, HMG_P, MATRIX_T, Result); // проведение заданного
+		matrix_mult(3, MATRIX_T, HMG_P, Result); // проведение заданного
 		// преобразования
 		for (int i = 0; i < VERTNUM; i++)
 			for (int j = 0; j < DISMENTION; j++)
@@ -704,15 +706,30 @@ namespace CppCLRWinFormsProject {
 
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 
+		this->textBox11->Text = Convert::ToString(0);
+		this->textBox13->Text = Convert::ToString(0);
+		this->textBox16->Text = Convert::ToString(0);
+		this->textBox17->Text = Convert::ToString(0);
+		
 		MATRIX_T[0][0] = Convert::ToInt32(textBox10->Text);
-		MATRIX_T[0][1] = Convert::ToInt32(textBox11->Text);
-		MATRIX_T[0][2] = Convert::ToInt32(textBox12->Text);
-		MATRIX_T[1][0] = Convert::ToInt32(textBox13->Text);
+		MATRIX_T[0][1] = 0;
+		MATRIX_T[0][2] = 0;
+		MATRIX_T[1][0] = 0;
 		MATRIX_T[1][1] = Convert::ToInt32(textBox14->Text);
-		MATRIX_T[1][2] = Convert::ToInt32(textBox15->Text);
-		MATRIX_T[2][0] = Convert::ToInt32(textBox16->Text);
-		MATRIX_T[2][1] = Convert::ToInt32(textBox17->Text);
-		MATRIX_T[2][2] = Convert::ToInt32(textBox18->Text);
+		MATRIX_T[1][2] = 0;
+		MATRIX_T[2][0] = 0;
+		MATRIX_T[2][1] = 0;
+		MATRIX_T[2][2] = 1;
+
+		double ResultLeft[VERTNUM][DISMENTION] = { 0 };
+		
+		ResultLeft[0][0] = HMG_REFLECTION[0][0];
+		ResultLeft[0][1] = HMG_REFLECTION[0][1];
+
+
+		hmgToDek(VERTNUM, HMG_P, DEK_P); 
+
+		pictureBox1->Refresh();
 
 	}
 
