@@ -230,63 +230,63 @@ namespace CppCLRWinFormsProject {
 			// 
 			// textBox10
 			// 
-			this->textBox10->Location = System::Drawing::Point(898, 455);
+			this->textBox10->Location = System::Drawing::Point(755, 371);
 			this->textBox10->Name = L"textBox10";
 			this->textBox10->Size = System::Drawing::Size(37, 20);
 			this->textBox10->TabIndex = 26;
 			// 
 			// textBox11
 			// 
-			this->textBox11->Location = System::Drawing::Point(823, 455);
+			this->textBox11->Location = System::Drawing::Point(828, 371);
 			this->textBox11->Name = L"textBox11";
 			this->textBox11->Size = System::Drawing::Size(37, 20);
 			this->textBox11->TabIndex = 25;
 			// 
 			// textBox12
 			// 
-			this->textBox12->Location = System::Drawing::Point(750, 455);
+			this->textBox12->Location = System::Drawing::Point(903, 371);
 			this->textBox12->Name = L"textBox12";
 			this->textBox12->Size = System::Drawing::Size(37, 20);
 			this->textBox12->TabIndex = 24;
 			// 
 			// textBox13
 			// 
-			this->textBox13->Location = System::Drawing::Point(898, 411);
+			this->textBox13->Location = System::Drawing::Point(755, 416);
 			this->textBox13->Name = L"textBox13";
 			this->textBox13->Size = System::Drawing::Size(37, 20);
 			this->textBox13->TabIndex = 23;
 			// 
 			// textBox14
 			// 
-			this->textBox14->Location = System::Drawing::Point(823, 411);
+			this->textBox14->Location = System::Drawing::Point(828, 416);
 			this->textBox14->Name = L"textBox14";
 			this->textBox14->Size = System::Drawing::Size(37, 20);
 			this->textBox14->TabIndex = 22;
 			// 
 			// textBox15
 			// 
-			this->textBox15->Location = System::Drawing::Point(750, 411);
+			this->textBox15->Location = System::Drawing::Point(903, 416);
 			this->textBox15->Name = L"textBox15";
 			this->textBox15->Size = System::Drawing::Size(37, 20);
 			this->textBox15->TabIndex = 21;
 			// 
 			// textBox16
 			// 
-			this->textBox16->Location = System::Drawing::Point(898, 367);
+			this->textBox16->Location = System::Drawing::Point(755, 464);
 			this->textBox16->Name = L"textBox16";
 			this->textBox16->Size = System::Drawing::Size(37, 20);
 			this->textBox16->TabIndex = 20;
 			// 
 			// textBox17
 			// 
-			this->textBox17->Location = System::Drawing::Point(823, 367);
+			this->textBox17->Location = System::Drawing::Point(828, 464);
 			this->textBox17->Name = L"textBox17";
 			this->textBox17->Size = System::Drawing::Size(37, 20);
 			this->textBox17->TabIndex = 19;
 			// 
 			// textBox18
 			// 
-			this->textBox18->Location = System::Drawing::Point(750, 367);
+			this->textBox18->Location = System::Drawing::Point(903, 464);
 			this->textBox18->Name = L"textBox18";
 			this->textBox18->Size = System::Drawing::Size(37, 20);
 			this->textBox18->TabIndex = 18;
@@ -294,7 +294,7 @@ namespace CppCLRWinFormsProject {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(912, 339);
+			this->label5->Location = System::Drawing::Point(917, 339);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(13, 13);
 			this->label5->TabIndex = 17;
@@ -303,7 +303,7 @@ namespace CppCLRWinFormsProject {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(836, 339);
+			this->label6->Location = System::Drawing::Point(841, 339);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(14, 13);
 			this->label6->TabIndex = 16;
@@ -312,7 +312,7 @@ namespace CppCLRWinFormsProject {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(762, 339);
+			this->label7->Location = System::Drawing::Point(767, 339);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(14, 13);
 			this->label7->TabIndex = 15;
@@ -366,7 +366,7 @@ namespace CppCLRWinFormsProject {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(805, 493);
+			this->button2->Location = System::Drawing::Point(805, 509);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 31;
@@ -457,9 +457,18 @@ namespace CppCLRWinFormsProject {
 	}
 
 	private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
+
+		this->textBox3->Text = "1";
+		this->textBox6->Text = "1";
+		this->textBox9->Text = "1";
+		this->textBox12->Text = "1";
+		this->textBox15->Text = "1";
+		this->textBox18->Text = "1";
 	}
 
 //==============================================================================================
+
+	
 
 	private: System::Void matrix_mult(int numOfVertexA, int matrix1[][DISMENTION], //double matrix1,2
 		int matrix2[][DISMENTION], double matrixResult[][DISMENTION]) {
@@ -488,7 +497,7 @@ namespace CppCLRWinFormsProject {
 	}
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	
+
 		HMG_P[0][0] = Convert::ToInt32(textBox1->Text);
 		HMG_P[0][1] = Convert::ToInt32(textBox2->Text);
 		HMG_P[0][2] = Convert::ToInt32(textBox3->Text);
