@@ -1,4 +1,7 @@
-﻿#pragma once
+﻿#include <math.h>
+#define PI 3.14
+
+#pragma once
 
 namespace CppCLRWinFormsProject {
 
@@ -73,6 +76,12 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::Splitter^ splitter1;
 	private: System::Windows::Forms::Splitter^ splitter2;
 	private: System::Windows::Forms::Label^ label12;
+	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::TextBox^ angle;
+
+	private: System::Windows::Forms::Label^ label13;
+	private: System::Windows::Forms::Button^ button5;
 
 	private: System::ComponentModel::Container ^components;
 
@@ -114,6 +123,11 @@ namespace CppCLRWinFormsProject {
 			this->splitter1 = (gcnew System::Windows::Forms::Splitter());
 			this->splitter2 = (gcnew System::Windows::Forms::Splitter());
 			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->angle = (gcnew System::Windows::Forms::TextBox());
+			this->label13 = (gcnew System::Windows::Forms::Label());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -230,71 +244,71 @@ namespace CppCLRWinFormsProject {
 			// 
 			// textBox10
 			// 
-			this->textBox10->Location = System::Drawing::Point(755, 371);
+			this->textBox10->Location = System::Drawing::Point(763, 360);
 			this->textBox10->Name = L"textBox10";
-			this->textBox10->Size = System::Drawing::Size(37, 20);
+			this->textBox10->Size = System::Drawing::Size(56, 20);
 			this->textBox10->TabIndex = 26;
 			// 
 			// textBox11
 			// 
-			this->textBox11->Location = System::Drawing::Point(828, 371);
+			this->textBox11->Location = System::Drawing::Point(837, 360);
 			this->textBox11->Name = L"textBox11";
-			this->textBox11->Size = System::Drawing::Size(37, 20);
+			this->textBox11->Size = System::Drawing::Size(56, 20);
 			this->textBox11->TabIndex = 25;
 			// 
 			// textBox12
 			// 
-			this->textBox12->Location = System::Drawing::Point(903, 371);
+			this->textBox12->Location = System::Drawing::Point(909, 360);
 			this->textBox12->Name = L"textBox12";
-			this->textBox12->Size = System::Drawing::Size(37, 20);
+			this->textBox12->Size = System::Drawing::Size(56, 20);
 			this->textBox12->TabIndex = 24;
 			// 
 			// textBox13
 			// 
-			this->textBox13->Location = System::Drawing::Point(755, 416);
+			this->textBox13->Location = System::Drawing::Point(763, 405);
 			this->textBox13->Name = L"textBox13";
-			this->textBox13->Size = System::Drawing::Size(37, 20);
+			this->textBox13->Size = System::Drawing::Size(56, 20);
 			this->textBox13->TabIndex = 23;
 			// 
 			// textBox14
 			// 
-			this->textBox14->Location = System::Drawing::Point(828, 416);
+			this->textBox14->Location = System::Drawing::Point(837, 405);
 			this->textBox14->Name = L"textBox14";
-			this->textBox14->Size = System::Drawing::Size(37, 20);
+			this->textBox14->Size = System::Drawing::Size(56, 20);
 			this->textBox14->TabIndex = 22;
 			// 
 			// textBox15
 			// 
-			this->textBox15->Location = System::Drawing::Point(903, 416);
+			this->textBox15->Location = System::Drawing::Point(909, 405);
 			this->textBox15->Name = L"textBox15";
-			this->textBox15->Size = System::Drawing::Size(37, 20);
+			this->textBox15->Size = System::Drawing::Size(56, 20);
 			this->textBox15->TabIndex = 21;
 			// 
 			// textBox16
 			// 
-			this->textBox16->Location = System::Drawing::Point(755, 464);
+			this->textBox16->Location = System::Drawing::Point(763, 453);
 			this->textBox16->Name = L"textBox16";
-			this->textBox16->Size = System::Drawing::Size(37, 20);
+			this->textBox16->Size = System::Drawing::Size(56, 20);
 			this->textBox16->TabIndex = 20;
 			// 
 			// textBox17
 			// 
-			this->textBox17->Location = System::Drawing::Point(828, 464);
+			this->textBox17->Location = System::Drawing::Point(837, 453);
 			this->textBox17->Name = L"textBox17";
-			this->textBox17->Size = System::Drawing::Size(37, 20);
+			this->textBox17->Size = System::Drawing::Size(56, 20);
 			this->textBox17->TabIndex = 19;
 			// 
 			// textBox18
 			// 
-			this->textBox18->Location = System::Drawing::Point(903, 464);
+			this->textBox18->Location = System::Drawing::Point(909, 453);
 			this->textBox18->Name = L"textBox18";
-			this->textBox18->Size = System::Drawing::Size(37, 20);
+			this->textBox18->Size = System::Drawing::Size(56, 20);
 			this->textBox18->TabIndex = 18;
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(917, 339);
+			this->label5->Location = System::Drawing::Point(936, 328);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(13, 13);
 			this->label5->TabIndex = 17;
@@ -303,7 +317,7 @@ namespace CppCLRWinFormsProject {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(841, 339);
+			this->label6->Location = System::Drawing::Point(860, 328);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(14, 13);
 			this->label6->TabIndex = 16;
@@ -312,7 +326,7 @@ namespace CppCLRWinFormsProject {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(767, 339);
+			this->label7->Location = System::Drawing::Point(786, 328);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(14, 13);
 			this->label7->TabIndex = 15;
@@ -321,7 +335,7 @@ namespace CppCLRWinFormsProject {
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(786, 306);
+			this->label8->Location = System::Drawing::Point(805, 295);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(107, 13);
 			this->label8->TabIndex = 14;
@@ -366,11 +380,11 @@ namespace CppCLRWinFormsProject {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(805, 509);
+			this->button2->Location = System::Drawing::Point(725, 498);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 31;
-			this->button2->Text = L"OK";
+			this->button2->Text = L"Transfer";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
 			// 
@@ -399,12 +413,62 @@ namespace CppCLRWinFormsProject {
 			this->label12->TabIndex = 34;
 			this->label12->Text = L"625x490";
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(818, 498);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->TabIndex = 35;
+			this->button3->Text = L"Scale";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
+			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(668, 422);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(75, 23);
+			this->button4->TabIndex = 36;
+			this->button4->Text = L"Count";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
+			// 
+			// angle
+			// 
+			this->angle->Location = System::Drawing::Point(668, 396);
+			this->angle->Name = L"angle";
+			this->angle->Size = System::Drawing::Size(60, 20);
+			this->angle->TabIndex = 37;
+			// 
+			// label13
+			// 
+			this->label13->AutoSize = true;
+			this->label13->Location = System::Drawing::Point(669, 380);
+			this->label13->Name = L"label13";
+			this->label13->Size = System::Drawing::Size(61, 13);
+			this->label13->TabIndex = 38;
+			this->label13->Text = L"Angle, deg:";
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(909, 498);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(75, 23);
+			this->button5->TabIndex = 39;
+			this->button5->Text = L"Rotate";
+			this->button5->UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Menu;
 			this->ClientSize = System::Drawing::Size(997, 749);
+			this->Controls->Add(this->button5);
+			this->Controls->Add(this->label13);
+			this->Controls->Add(this->angle);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->splitter2);
 			this->Controls->Add(this->splitter1);
@@ -461,8 +525,8 @@ namespace CppCLRWinFormsProject {
 		this->textBox3->Text = "1";
 		this->textBox6->Text = "1";
 		this->textBox9->Text = "1";
-		this->textBox12->Text = "1";
-		this->textBox15->Text = "1";
+		this->textBox12->Text = "0";
+		this->textBox15->Text = "0";
 		this->textBox18->Text = "1";
 	}
 
@@ -495,6 +559,7 @@ namespace CppCLRWinFormsProject {
 			else System::Windows::Forms::MessageBox::Show("Replace zero values.");
 		}
 	}
+
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 
@@ -550,6 +615,42 @@ namespace CppCLRWinFormsProject {
 		//однородных в экранные
 		pictureBox1->Refresh(); // вызов перерисовки элемента
 		//pictureBox
+	}
+
+
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		MATRIX_T[0][0] = Convert::ToInt32(textBox10->Text);
+		MATRIX_T[0][1] = Convert::ToInt32(textBox11->Text);
+		MATRIX_T[0][2] = Convert::ToInt32(textBox12->Text);
+		MATRIX_T[1][0] = Convert::ToInt32(textBox13->Text);
+		MATRIX_T[1][1] = Convert::ToInt32(textBox14->Text);
+		MATRIX_T[1][2] = Convert::ToInt32(textBox15->Text);
+		MATRIX_T[2][0] = Convert::ToInt32(textBox16->Text);
+		MATRIX_T[2][1] = Convert::ToInt32(textBox17->Text);
+		MATRIX_T[2][2] = Convert::ToInt32(textBox18->Text);
+
+	}
+
+
+	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		this->textBox16->Text = Convert::ToString(0);
+		this->textBox17->Text = Convert::ToString(0);
+
+		double angle1 = Convert::ToInt32(angle->Text);
+		double angleRad = angle1 * PI / 180;
+
+		double angleSin = sin(angleRad);
+		double angleCos = cos(angleRad);
+
+		this->textBox3->Text = "1";
+
+		this->textBox10->Text = Convert::ToString(angleCos);
+		this->textBox11->Text = Convert::ToString(0 - angleSin);
+		this->textBox13->Text = Convert::ToString(angleSin);
+		this->textBox14->Text = Convert::ToString(angleCos);
+
 	}
 
 
