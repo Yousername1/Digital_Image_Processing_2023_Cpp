@@ -188,7 +188,7 @@ namespace CppCLRWinFormsProject {
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(903, 144);
+			this->textBox4->Location = System::Drawing::Point(755, 144);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(37, 20);
 			this->textBox4->TabIndex = 10;
@@ -202,14 +202,14 @@ namespace CppCLRWinFormsProject {
 			// 
 			// textBox6
 			// 
-			this->textBox6->Location = System::Drawing::Point(755, 144);
+			this->textBox6->Location = System::Drawing::Point(903, 147);
 			this->textBox6->Name = L"textBox6";
 			this->textBox6->Size = System::Drawing::Size(37, 20);
 			this->textBox6->TabIndex = 8;
 			// 
 			// textBox7
 			// 
-			this->textBox7->Location = System::Drawing::Point(903, 188);
+			this->textBox7->Location = System::Drawing::Point(755, 188);
 			this->textBox7->Name = L"textBox7";
 			this->textBox7->Size = System::Drawing::Size(37, 20);
 			this->textBox7->TabIndex = 13;
@@ -223,7 +223,7 @@ namespace CppCLRWinFormsProject {
 			// 
 			// textBox9
 			// 
-			this->textBox9->Location = System::Drawing::Point(755, 188);
+			this->textBox9->Location = System::Drawing::Point(903, 188);
 			this->textBox9->Name = L"textBox9";
 			this->textBox9->Size = System::Drawing::Size(37, 20);
 			this->textBox9->TabIndex = 11;
