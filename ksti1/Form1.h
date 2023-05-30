@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 namespace CppCLRWinFormsProject {
 
@@ -9,9 +9,14 @@ namespace CppCLRWinFormsProject {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for Form1
-	/// </summary>
+	const int VERTNUM = 3;
+	const int DISMENTION = 3;
+
+	int HMG_P[VERTNUM][DISMENTION] = { 0 };
+	int DEK_P[VERTNUM][DISMENTION - 1] = { 0 };
+	int MATRIX_T[DISMENTION][DISMENTION] = { 0 };
+
+
 	public ref class Form1 : public System::Windows::Forms::Form
 	{
 	public:
@@ -24,9 +29,7 @@ namespace CppCLRWinFormsProject {
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
+		
 		~Form1()
 		{
 			if (components)
@@ -69,18 +72,11 @@ namespace CppCLRWinFormsProject {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Splitter^ splitter1;
 	private: System::Windows::Forms::Splitter^ splitter2;
+	private: System::Windows::Forms::Label^ label12;
 
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container ^components;
+	private: System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -117,6 +113,7 @@ namespace CppCLRWinFormsProject {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->splitter1 = (gcnew System::Windows::Forms::Splitter());
 			this->splitter2 = (gcnew System::Windows::Forms::Splitter());
+			this->label12 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -128,6 +125,7 @@ namespace CppCLRWinFormsProject {
 			this->pictureBox1->Size = System::Drawing::Size(625, 490);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Form1::pictureBox1_Paint);
 			// 
 			// label1
 			// 
@@ -364,6 +362,7 @@ namespace CppCLRWinFormsProject {
 			this->button1->TabIndex = 30;
 			this->button1->Text = L"OK";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
 			// 
 			// button2
 			// 
@@ -373,6 +372,7 @@ namespace CppCLRWinFormsProject {
 			this->button2->TabIndex = 31;
 			this->button2->Text = L"OK";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
 			// 
 			// splitter1
 			// 
@@ -390,12 +390,22 @@ namespace CppCLRWinFormsProject {
 			this->splitter2->TabIndex = 33;
 			this->splitter2->TabStop = false;
 			// 
+			// label12
+			// 
+			this->label12->AutoSize = true;
+			this->label12->Location = System::Drawing::Point(605, 519);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(48, 13);
+			this->label12->TabIndex = 34;
+			this->label12->Text = L"625x490";
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Menu;
 			this->ClientSize = System::Drawing::Size(997, 749);
+			this->Controls->Add(this->label12);
 			this->Controls->Add(this->splitter2);
 			this->Controls->Add(this->splitter1);
 			this->Controls->Add(this->button2);
@@ -439,11 +449,103 @@ namespace CppCLRWinFormsProject {
 
 		}
 #pragma endregion
+
 	private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
-private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+
+	private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+
+	private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+
+//==============================================================================================
+
+	private: System::Void matrix_mult(int numOfVertexA, int matrix1[][DISMENTION], //double matrix1,2
+		int matrix2[][DISMENTION], double matrixResult[][DISMENTION]) {
+
+		for (int i = 0; i < numOfVertexA; i++) {
+			for (int j = 0; j < DISMENTION; j++) {
+				matrixResult[i][j] = 0;
+				for (int k = 0; k < DISMENTION; k++) {
+					matrixResult[i][j] += matrix1[i][k] * matrix2[k][j];
+				}
+			}
+		}
+	}
+
+	private: System::Void hmgToDek(int numOfVertexA, int HMG[][DISMENTION], //double HMG...
+		int dekart[][DISMENTION - 1]) {
+
+		for (int i = 0; i < numOfVertexA; i++) {
+			double tmp = HMG[i][DISMENTION - 1];
+			if (tmp != 0) {
+				dekart[i][0] = HMG[i][0] / tmp;
+				dekart[i][1] = HMG[i][1] / tmp;
+			}
+			else System::Windows::Forms::MessageBox::Show("Replace zero values.");
+		}
+	}
+
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	
+		HMG_P[0][0] = Convert::ToInt32(textBox1->Text);
+		HMG_P[0][1] = Convert::ToInt32(textBox2->Text);
+		HMG_P[0][2] = Convert::ToInt32(textBox3->Text);
+		HMG_P[1][0] = Convert::ToInt32(textBox4->Text);
+		HMG_P[1][1] = Convert::ToInt32(textBox5->Text);
+		HMG_P[1][2] = Convert::ToInt32(textBox6->Text);
+		HMG_P[2][0] = Convert::ToInt32(textBox7->Text);
+		HMG_P[2][1] = Convert::ToInt32(textBox8->Text);
+		HMG_P[2][2] = Convert::ToInt32(textBox9->Text);
+
+		hmgToDek(VERTNUM, HMG_P, DEK_P);
+
+		pictureBox1->Refresh();
+	}
+
+
+	private: System::Void pictureBox1_Paint(System::Object^ sender, 
+		System::Windows::Forms::PaintEventArgs^ e) {
+
+		e->Graphics->DrawLine(System::Drawing::Pens::Red, DEK_P[0][0],
+			DEK_P[0][1], DEK_P[1][0], DEK_P[1][1]);
+		e->Graphics->DrawLine(System::Drawing::Pens::Red, DEK_P[1][0],
+			DEK_P[1][1], DEK_P[2][0], DEK_P[2][1]);
+		e->Graphics->DrawLine(System::Drawing::Pens::Red, DEK_P[2][0],
+			DEK_P[2][1], DEK_P[0][0], DEK_P[0][1]);
+	}
+
+
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		MATRIX_T[0][0] = Convert::ToInt32(textBox10->Text);
+		MATRIX_T[0][1] = Convert::ToInt32(textBox11->Text);
+		MATRIX_T[0][2] = Convert::ToInt32(textBox12->Text);
+		MATRIX_T[1][0] = Convert::ToInt32(textBox13->Text);
+		MATRIX_T[1][1] = Convert::ToInt32(textBox14->Text);
+		MATRIX_T[1][2] = Convert::ToInt32(textBox15->Text);
+		MATRIX_T[2][0] = Convert::ToInt32(textBox16->Text);
+		MATRIX_T[2][1] = Convert::ToInt32(textBox17->Text);
+		MATRIX_T[2][2] = Convert::ToInt32(textBox18->Text);
+
+		double Result[VERTNUM][DISMENTION] = { 0 }; // служебный массив для
+		//вычислений
+		matrix_mult(3, HMG_P, MATRIX_T, Result); // проведение заданного
+		// преобразования
+		for (int i = 0; i < VERTNUM; i++)
+			for (int j = 0; j < DISMENTION; j++)
+				HMG_P[i][j] = Result[i][j]; // запоминание новых
+		// координат фигуры
+		hmgToDek(VERTNUM, HMG_P, DEK_P); // перевод координат из
+		//однородных в экранные
+		pictureBox1->Refresh(); // вызов перерисовки элемента
+		//pictureBox
+	}
+
+
+}; //закрывает класс 
+
+	
+
 }
