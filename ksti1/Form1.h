@@ -16,7 +16,9 @@ namespace CppCLRWinFormsProject {
 	const int DISMENTION = 3;
 
 	int HMG_P[VERTNUM][DISMENTION] = { 0 };
+	int HMG_REFLECTION[VERTNUM][DISMENTION] = { 0 };
 	int DEK_P[VERTNUM][DISMENTION - 1] = { 0 };
+	int DEK_REF[VERTNUM][DISMENTION - 1] = { 0 };
 	int MATRIX_T[DISMENTION][DISMENTION] = { 0 };
 
 
@@ -82,6 +84,8 @@ namespace CppCLRWinFormsProject {
 
 	private: System::Windows::Forms::Label^ label13;
 	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Label^ label14;
+	private: System::Windows::Forms::TextBox^ textBox19;
 
 	private: System::ComponentModel::Container ^components;
 
@@ -128,6 +132,8 @@ namespace CppCLRWinFormsProject {
 			this->angle = (gcnew System::Windows::Forms::TextBox());
 			this->label13 = (gcnew System::Windows::Forms::Label());
 			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->label14 = (gcnew System::Windows::Forms::Label());
+			this->textBox19 = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -370,7 +376,7 @@ namespace CppCLRWinFormsProject {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(808, 233);
+			this->button1->Location = System::Drawing::Point(874, 238);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 30;
@@ -458,12 +464,30 @@ namespace CppCLRWinFormsProject {
 			this->button5->Text = L"Rotate";
 			this->button5->UseVisualStyleBackColor = true;
 			// 
+			// label14
+			// 
+			this->label14->AutoSize = true;
+			this->label14->Location = System::Drawing::Point(674, 243);
+			this->label14->Name = L"label14";
+			this->label14->Size = System::Drawing::Size(62, 13);
+			this->label14->TabIndex = 40;
+			this->label14->Text = L"Length, pix:";
+			// 
+			// textBox19
+			// 
+			this->textBox19->Location = System::Drawing::Point(742, 236);
+			this->textBox19->Name = L"textBox19";
+			this->textBox19->Size = System::Drawing::Size(67, 20);
+			this->textBox19->TabIndex = 41;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Menu;
 			this->ClientSize = System::Drawing::Size(997, 749);
+			this->Controls->Add(this->textBox19);
+			this->Controls->Add(this->label14);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->label13);
 			this->Controls->Add(this->angle);
@@ -560,22 +584,82 @@ namespace CppCLRWinFormsProject {
 		}
 	}
 
+	private: System::Void hmgToDekExtend(int numOfVertexA, int HMG[][DISMENTION], //double HMG...
+		int HMG_REF[][DISMENTION], int dekart[][DISMENTION - 1], int dekartRef[][DISMENTION - 1]) {
+
+			for (int i = 0; i < numOfVertexA; i++) {
+				double tmp = HMG[i][DISMENTION - 1];
+				double tmp1 = HMG_REF[i][DISMENTION - 1];
+				if (tmp != 0 && tmp1 != 0) {
+					dekart[i][0] = HMG[i][0] / tmp;
+					dekart[i][1] = HMG[i][1] / tmp;
+					dekartRef[i][0] = HMG_REF[i][0] / tmp1;
+					dekartRef[i][1] = HMG_REF[i][1] / tmp1;
+				}
+				else System::Windows::Forms::MessageBox::Show("Replace zero values.");
+			}
+		}
+
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		HMG_P[0][0] = Convert::ToInt32(textBox1->Text);
-		HMG_P[0][1] = Convert::ToInt32(textBox2->Text);
+		if (this->textBox19->Text->Length == 0) {
+
+			HMG_P[0][0] = Convert::ToInt32(textBox1->Text);
+			HMG_P[0][1] = Convert::ToInt32(textBox2->Text);
+			HMG_P[0][2] = Convert::ToInt32(textBox3->Text);
+			HMG_P[1][0] = Convert::ToInt32(textBox4->Text);
+			HMG_P[1][1] = Convert::ToInt32(textBox5->Text);
+			HMG_P[1][2] = Convert::ToInt32(textBox6->Text);
+			HMG_P[2][0] = Convert::ToInt32(textBox7->Text);
+			HMG_P[2][1] = Convert::ToInt32(textBox8->Text);
+			HMG_P[2][2] = Convert::ToInt32(textBox9->Text);
+
+			hmgToDek(VERTNUM, HMG_P, DEK_P);
+
+			pictureBox1->Refresh();
+
+		}
+
+		int xZero = 312;
+		int yZero = 245;
+
+		int length = Convert::ToInt32(textBox19->Text);
+		double yDelta = length / 2;
+		double xDelta = sqrt(3 * pow(length, 2) / 4);
+
+		this->textBox1->Text = Convert::ToString(xZero);
+		this->textBox2->Text = Convert::ToString(yZero);
+
+		this->textBox4->Text = Convert::ToString(xZero - xDelta);
+		this->textBox5->Text = Convert::ToString(yZero - yDelta);
+
+		this->textBox7->Text = Convert::ToString(xZero + xDelta);
+		this->textBox8->Text = Convert::ToString(yZero + yDelta);
+
+		HMG_P[0][0] = xZero;
+		HMG_P[0][1] = yZero;
 		HMG_P[0][2] = Convert::ToInt32(textBox3->Text);
-		HMG_P[1][0] = Convert::ToInt32(textBox4->Text);
-		HMG_P[1][1] = Convert::ToInt32(textBox5->Text);
+		HMG_P[1][0] = xZero - xDelta;
+		HMG_P[1][1] = yZero - yDelta;
 		HMG_P[1][2] = Convert::ToInt32(textBox6->Text);
-		HMG_P[2][0] = Convert::ToInt32(textBox7->Text);
-		HMG_P[2][1] = Convert::ToInt32(textBox8->Text);
+		HMG_P[2][0] = xZero - xDelta;
+		HMG_P[2][1] = yZero + yDelta;
 		HMG_P[2][2] = Convert::ToInt32(textBox9->Text);
 
-		hmgToDek(VERTNUM, HMG_P, DEK_P);
+		HMG_REFLECTION[0][0] = xZero;
+		HMG_REFLECTION[0][1] = yZero;
+		HMG_REFLECTION[0][2] = Convert::ToInt32(textBox3->Text);
+		HMG_REFLECTION[1][0] = xZero + xDelta;
+		HMG_REFLECTION[1][1] = yZero - yDelta;
+		HMG_REFLECTION[1][2] = Convert::ToInt32(textBox6->Text);
+		HMG_REFLECTION[2][0] = xZero + xDelta;
+		HMG_REFLECTION[2][1] = yZero + yDelta;
+		HMG_REFLECTION[2][2] = Convert::ToInt32(textBox9->Text);
 
+		hmgToDekExtend(VERTNUM, HMG_P, HMG_REFLECTION, DEK_P, DEK_REF);
 		pictureBox1->Refresh();
+		
 	}
 
 
