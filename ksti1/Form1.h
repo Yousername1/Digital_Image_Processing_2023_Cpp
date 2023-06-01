@@ -5,6 +5,7 @@
 
 namespace CppCLRWinFormsProject {
 
+	using namespace std;
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -12,14 +13,14 @@ namespace CppCLRWinFormsProject {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	const int VERTNUM = 3;
-	const int DISMENTION = 3;
+	const int VERTNUM = 3; //т.к. иду путём через 2 треугольника
+	const int DISMENTION = 3; //это размерность матриц (всех)
 
-	int HMG_P[VERTNUM][DISMENTION] = { 0 };
-	int HMG_REFLECTION[VERTNUM][DISMENTION] = { 0 };
-	int DEK_P[VERTNUM][DISMENTION - 1] = { 0 };
-	int DEK_REF[VERTNUM][DISMENTION - 1] = { 0 };
-	int MATRIX_T[DISMENTION][DISMENTION] = { 0 };
+	int HMG_P[VERTNUM][DISMENTION] = { 0 }; //треугольник 1, матрица с однородными
+	int HMG_REFLECTION[VERTNUM][DISMENTION] = { 0 }; //треугольник 2, матрица с однородными
+	int DEK_P[VERTNUM][DISMENTION - 1] = { 0 }; //треугольник 1, матрица декартовых
+	int DEK_REF[VERTNUM][DISMENTION - 1] = { 0 }; //треугольник 2, матрица декартовых
+	int T_MATRIX[DISMENTION][DISMENTION] = { 0 }; //матрицы транформации 
 
 
 	public ref class Form1 : public System::Windows::Forms::Form
@@ -355,11 +356,11 @@ namespace CppCLRWinFormsProject {
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(686, 103);
+			this->label9->Location = System::Drawing::Point(674, 103);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(42, 13);
+			this->label9->Size = System::Drawing::Size(62, 13);
 			this->label9->TabIndex = 27;
-			this->label9->Text = L"vertex1";
+			this->label9->Text = L"base vertex";
 			// 
 			// label10
 			// 
@@ -468,6 +469,7 @@ namespace CppCLRWinFormsProject {
 			this->RotateBut->TabIndex = 39;
 			this->RotateBut->Text = L"Rotate";
 			this->RotateBut->UseVisualStyleBackColor = true;
+			this->RotateBut->Click += gcnew System::EventHandler(this, &Form1::RotateBut_Click);
 			// 
 			// label14
 			// 
@@ -551,9 +553,12 @@ namespace CppCLRWinFormsProject {
 
 	private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
 
+		//чтобы в матрицы автоматически встали единицы и нули там, где это надо:
+		
 		this->textBox3->Text = "1";
 		this->textBox6->Text = "1";
 		this->textBox9->Text = "1";
+
 		this->textBox12->Text = "0";
 		this->textBox15->Text = "0";
 		this->textBox18->Text = "1";
@@ -576,6 +581,11 @@ namespace CppCLRWinFormsProject {
 		}
 	}
 
+	/*Метод для перевода в декартовые координаты. Принимаем число вершин,
+	* исходную матрицу, матрицу для декартовых. Циклом ходим по строчкам
+	* исходной матрицы. Делим первое и второе значение строчки на третье.
+	* Так повторяем для каждой строчки. Но по факту делится на единицу всё.
+	* Если в 3 столбике были нули, выкидываем ошибку.*/
 	private: System::Void hmgToDek(int numOfVertexA, int hmg[][DISMENTION], //double HMG...
 		int dekart[][DISMENTION - 1]) {
 
@@ -589,10 +599,26 @@ namespace CppCLRWinFormsProject {
 		}
 	}
 
-
+	//метод для просчёта координат для отрисовки + отрисовка другим методом
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 
+		/*Поскольку я отрисовываю 2 равносторонних треугольника, мне
+		* проще указать длину стороны, чем вершины. Но сначала проверка на то
+		* если длина всё-таки не указана, то отрисовываем по вершинам. Если
+		* вершины не указаны, кидаем ошибку.*/
+		
 		if (this->textBox19->Text->Length == 0) {
+
+			/*проверка внутри условия, т.к. если задана длина,
+			* то у нас уже не будут нули, т.к. авто расчёт.*/
+			for (int i = 0; i < VERTNUM; i++) {
+				for (int j = 0; j < DISMENTION; j++) {
+					if (HMG_P[i][j] == 0) {
+						break;
+					}
+				}
+			}
+			System::Windows::Forms::MessageBox::Show("Replace zero values.");
 
 			HMG_P[0][0] = Convert::ToInt32(textBox1->Text);
 			HMG_P[0][1] = Convert::ToInt32(textBox2->Text);
@@ -610,40 +636,51 @@ namespace CppCLRWinFormsProject {
 
 		}
 		else {
-			int xZero = 312;
-			int yZero = 245;
+
+			if (this->textBox1->Text->Length == 0 && this->textBox2->Text->Length == 0) {
+
+				int xZero = 312; //координаты центра поля
+				int yZero = 245;
+
+				this->textBox1->Text = Convert::ToString(xZero);
+				this->textBox2->Text = Convert::ToString(yZero);
+
+			} 
+
+			HMG_P[0][0] = Convert::ToInt32(textBox1->Text);
+			HMG_P[0][1] = Convert::ToInt32(textBox2->Text);
 
 			int length = Convert::ToInt32(textBox19->Text);
 			double yDelta = length / 2;
 			double xDelta = sqrt(3 * pow(length, 2) / 4);
 
-			this->textBox1->Text = Convert::ToString(xZero);
-			this->textBox2->Text = Convert::ToString(yZero);
+			//this->textBox1->Text = Convert::ToString(xZero);
+			//this->textBox2->Text = Convert::ToString(yZero);
 
-			this->textBox4->Text = Convert::ToString(xZero - xDelta);
-			this->textBox5->Text = Convert::ToString(yZero - yDelta);
+			this->textBox4->Text = Convert::ToString(HMG_P[0][0] - xDelta);
+			this->textBox5->Text = Convert::ToString(HMG_P[0][1] - yDelta);
 
-			this->textBox7->Text = Convert::ToString(xZero + xDelta);
-			this->textBox8->Text = Convert::ToString(yZero + yDelta);
+			this->textBox7->Text = Convert::ToString(HMG_P[0][0] + xDelta);
+			this->textBox8->Text = Convert::ToString(HMG_P[0][1] + yDelta);
 
-			HMG_P[0][0] = xZero;
-			HMG_P[0][1] = yZero;
+			//HMG_P[0][0] = xZero;
+			//HMG_P[0][1] = yZero;
 			HMG_P[0][2] = Convert::ToInt32(textBox3->Text);
-			HMG_P[1][0] = xZero - xDelta;
-			HMG_P[1][1] = yZero - yDelta;
+			HMG_P[1][0] = HMG_P[0][0] - xDelta;
+			HMG_P[1][1] = HMG_P[0][1] - yDelta;
 			HMG_P[1][2] = Convert::ToInt32(textBox6->Text);
-			HMG_P[2][0] = xZero - xDelta;
-			HMG_P[2][1] = yZero + yDelta;
+			HMG_P[2][0] = HMG_P[0][0] - xDelta;
+			HMG_P[2][1] = HMG_P[0][1] + yDelta;
 			HMG_P[2][2] = Convert::ToInt32(textBox9->Text);
 
-			HMG_REFLECTION[0][0] = xZero;
-			HMG_REFLECTION[0][1] = yZero;
+			HMG_REFLECTION[0][0] = HMG_P[0][0];
+			HMG_REFLECTION[0][1] = HMG_P[0][1];
 			HMG_REFLECTION[0][2] = Convert::ToInt32(textBox3->Text);
-			HMG_REFLECTION[1][0] = xZero + xDelta;
-			HMG_REFLECTION[1][1] = yZero - yDelta;
+			HMG_REFLECTION[1][0] = HMG_P[0][0] + xDelta;
+			HMG_REFLECTION[1][1] = HMG_P[0][1] - yDelta;
 			HMG_REFLECTION[1][2] = Convert::ToInt32(textBox6->Text);
-			HMG_REFLECTION[2][0] = xZero + xDelta;
-			HMG_REFLECTION[2][1] = yZero + yDelta;
+			HMG_REFLECTION[2][0] = HMG_P[0][0] + xDelta;
+			HMG_REFLECTION[2][1] = HMG_P[0][1] + yDelta;
 			HMG_REFLECTION[2][2] = Convert::ToInt32(textBox9->Text);
 
 			hmgToDek(VERTNUM, HMG_P, DEK_P);
@@ -656,7 +693,7 @@ namespace CppCLRWinFormsProject {
 		
 	}
 
-
+	//метод для отрисовки
 	private: System::Void pictureBox1_Paint(System::Object^ sender, 
 		System::Windows::Forms::PaintEventArgs^ e) {
 
@@ -677,63 +714,7 @@ namespace CppCLRWinFormsProject {
 
 	}
 
-
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-
-		this->textBox10->Text = Convert::ToString(1);
-		this->textBox14->Text = Convert::ToString(1);
-
-		this->textBox11->Text = Convert::ToString(0);
-		this->textBox13->Text = Convert::ToString(0);
-
-		MATRIX_T[2][0] = Convert::ToInt32(textBox16->Text);
-		MATRIX_T[2][1] = Convert::ToInt32(textBox17->Text);
-
-		double Result[VERTNUM][DISMENTION] = { 0 }; // служебный массив для
-		//вычислений
-		matrix_mult(3, MATRIX_T, HMG_P, Result); // проведение заданного
-		// преобразования
-		for (int i = 0; i < VERTNUM; i++)
-			for (int j = 0; j < DISMENTION; j++)
-				HMG_P[i][j] = Result[i][j]; // запоминание новых
-		// координат фигуры
-		hmgToDek(VERTNUM, HMG_P, DEK_P); // перевод координат из
-		//однородных в экранные
-		pictureBox1->Refresh(); // вызов перерисовки элемента
-		//pictureBox
-	}
-
-
-	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-
-		this->textBox11->Text = Convert::ToString(0);
-		this->textBox13->Text = Convert::ToString(0);
-		this->textBox16->Text = Convert::ToString(0);
-		this->textBox17->Text = Convert::ToString(0);
-		
-		MATRIX_T[0][0] = Convert::ToInt32(textBox10->Text);
-		MATRIX_T[0][1] = 0;
-		MATRIX_T[0][2] = 0;
-		MATRIX_T[1][0] = 0;
-		MATRIX_T[1][1] = Convert::ToInt32(textBox14->Text);
-		MATRIX_T[1][2] = 0;
-		MATRIX_T[2][0] = 0;
-		MATRIX_T[2][1] = 0;
-		MATRIX_T[2][2] = 1;
-
-		double ResultLeft[VERTNUM][DISMENTION] = { 0 };
-		
-		ResultLeft[0][0] = HMG_REFLECTION[0][0];
-		ResultLeft[0][1] = HMG_REFLECTION[0][1];
-
-
-		hmgToDek(VERTNUM, HMG_P, DEK_P); 
-
-		pictureBox1->Refresh();
-
-	}
-
-
+	//метод чтобы посчитать синусы-косинусы для Р-матрицы и загнать их в таблицу
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 
 		this->textBox16->Text = Convert::ToString(0);
@@ -751,6 +732,62 @@ namespace CppCLRWinFormsProject {
 		this->textBox11->Text = Convert::ToString(0 - angleSin);
 		this->textBox13->Text = Convert::ToString(angleSin);
 		this->textBox14->Text = Convert::ToString(angleCos);
+
+	}
+
+
+	//матрица трансформации
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		
+		this->textBox10->Text = Convert::ToString(1);
+		this->textBox14->Text = Convert::ToString(1);
+
+		this->textBox11->Text = Convert::ToString(0);
+		this->textBox13->Text = Convert::ToString(0);
+
+		T_MATRIX[2][0] = Convert::ToInt32(textBox16->Text);
+		T_MATRIX[2][1] = Convert::ToInt32(textBox17->Text);
+
+		T_MATRIX[0][0] = Convert::ToInt32(textBox10->Text);
+		T_MATRIX[0][1] = Convert::ToInt32(textBox11->Text);
+		T_MATRIX[0][2] = Convert::ToInt32(textBox12->Text);
+		T_MATRIX[1][0] = Convert::ToInt32(textBox13->Text);
+		T_MATRIX[1][1] = Convert::ToInt32(textBox14->Text);
+		T_MATRIX[1][2] = Convert::ToInt32(textBox15->Text);
+		T_MATRIX[2][2] = Convert::ToInt32(textBox18->Text);
+
+		double matrixResult[VERTNUM][DISMENTION] = { 0 };
+		double matrixResultRef[VERTNUM][DISMENTION] = { 0 };
+		
+		matrix_mult(VERTNUM, HMG_P, T_MATRIX, matrixResult);
+		matrix_mult(VERTNUM, HMG_REFLECTION, T_MATRIX, matrixResultRef);
+
+		for (int i = 0; i < VERTNUM; i++) {
+			for (int j = 0; j < DISMENTION; j++) {
+				DEK_P[i][j] = matrixResult[i][j];
+			}
+		}
+
+		for (int i = 0; i < VERTNUM; i++) {
+			for (int j = 0; j < DISMENTION; j++) {
+				DEK_REF[i][j] = matrixResultRef[i][j];
+			}
+		}
+			
+		pictureBox1->Refresh();
+	}
+
+
+	//матрица скэйл
+	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+
+
+	}
+
+
+	//матрица ротэйт
+	private: System::Void RotateBut_Click(System::Object^ sender, System::EventArgs^ e) {
+
 
 	}
 
