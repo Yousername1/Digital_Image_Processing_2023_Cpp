@@ -786,8 +786,10 @@ namespace CppCLRWinFormsProject {
 		this->textBox16->Text = Convert::ToString(0);
 		this->textBox17->Text = Convert::ToString(0);
 
-		/*T_MATRIX[0][0] = Convert::ToInt32(textBox10->Text);
-		T_MATRIX[1][1] = Convert::ToInt32(textBox14->Text);*/
+		double Result[VERTNUM][DISMENTION] = { 0 };
+
+		T_MATRIX[0][0] = Convert::ToInt32(textBox10->Text);
+		T_MATRIX[1][1] = Convert::ToInt32(textBox14->Text);
 
 		T_MATRIX[0][1] = Convert::ToInt32(textBox11->Text);
 		T_MATRIX[0][2] = Convert::ToInt32(textBox12->Text);
@@ -797,35 +799,7 @@ namespace CppCLRWinFormsProject {
 		T_MATRIX[2][1] = Convert::ToInt32(textBox17->Text);
 		T_MATRIX[2][2] = Convert::ToInt32(textBox18->Text);
 
-		double matrixResult[VERTNUM][DISMENTION] = { 0 };
-		double matrixResultRef[VERTNUM][DISMENTION] = { 0 };
-
-		//dek_p
-		T_MATRIX[0][0] = 1 / (Convert::ToInt32(textBox10->Text));
-		T_MATRIX[1][1] = Convert::ToInt32(textBox14->Text);
-
-
-		matrix_mult(VERTNUM, HMG_P, T_MATRIX, matrixResult);
-		//matrix_mult(VERTNUM, HMG_REFLECTION, T_MATRIX, matrixResultRef);
-
-		for (int i = 0; i < VERTNUM; i++) {
-			for (int j = 0; j < DISMENTION; j++) {
-				DEK_P[i][j] = matrixResult[i][j];
-			}
-		}
-
-		for (int i = 0; i < VERTNUM; i++) {
-			for (int j = 0; j < DISMENTION; j++) {
-				DEK_REF[i][j] = matrixResultRef[i][j];
-			}
-		}
-
-		DEK_P[0][0] = 312;
-		DEK_P[0][1] = 245;
-		DEK_REF[0][0] = 312;
-		DEK_REF[0][1] = 245;
-
-		pictureBox1->Refresh();
+		Result[0][0] = ;
 
 	}
 

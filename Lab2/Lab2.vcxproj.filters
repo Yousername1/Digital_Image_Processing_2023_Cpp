@@ -18,13 +18,5 @@
     <ClCompile Include="Lab2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Methods.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Methods.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
