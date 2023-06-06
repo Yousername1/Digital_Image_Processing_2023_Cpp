@@ -27,6 +27,7 @@ class Filters
 		Mat mediana(const Mat& inputImg);
 
 		Mat DoG(const Mat& inputImg);
+		Mat sobel(const Mat& inputImg);
 
 
 	private:
