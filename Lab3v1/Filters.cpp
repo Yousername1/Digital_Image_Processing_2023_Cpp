@@ -133,4 +133,15 @@ Mat Filters::mediana(const Mat& inputImg)
 	return outputImg;
 }
 
+Mat Filters::DoG(const Mat& inputImg)
+{
+	Mat outOfGauss3 = gauss3(inputImg);
+	Mat outOfGauss5 = gauss5(inputImg);
+	Filters::outputImg = Mat::zeros(inputImg.size(), CV_8UC1);
+
+	absdiff(outOfGauss3, outOfGauss5, outputImg);
+	
+	return outputImg;
+}
+
 

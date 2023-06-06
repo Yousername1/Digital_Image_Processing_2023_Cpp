@@ -8,9 +8,11 @@ int main()
     
     //imshow("gauss3", image.gauss3(image.getImg()));
     //imshow("gauss5", image.gauss5(image.getImg()));
-    imshow("Mosaika", image.mosaika(10, image.getImg()));
+    //imshow("Mosaika", image.mosaika(10, image.getImg()));
     //imshow("ac", image.ac(18, image.getImg()));
     //imshow("mediana", image.mediana(image.getImg()));
+
+    imshow("DoG", image.DoG(image.getImg()));
 
     waitKey();
     return 0;

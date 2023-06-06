@@ -26,6 +26,8 @@ class Filters
 		Mat ac(int depth, const Mat& inputImg);
 		Mat mediana(const Mat& inputImg);
 
+		Mat DoG(const Mat& inputImg);
+
 
 	private:
 		Mat makeBiImg(Mat inputImg);
