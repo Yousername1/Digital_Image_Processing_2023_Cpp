@@ -17,9 +17,8 @@ Mat Filters::getImg()
 	return makeBiImg(workingImg);
 }
 
-Mat Filters::gauss3(const Mat& inputImg)
-{
-	Filters::outputImg = Mat::zeros(inputImg.size(), CV_8UC1);
+Mat Filters::gauss3(const Mat& inputImg) {
+	Mat outputImg = Mat::zeros(inputImg.size(), CV_8U);
 	int k = 36;
 	int Fk[3][3] = { {1,4,1},
 					 {4,16,4},
@@ -40,9 +39,8 @@ Mat Filters::gauss3(const Mat& inputImg)
 	return outputImg;
 }
 
-Mat Filters::gauss5(const Mat& inputImg)
-{
-	Filters::outputImg = Mat::zeros(inputImg.size(), CV_8UC1);
+Mat Filters::gauss5(const Mat& inputImg) {
+	Mat outputImg = Mat::zeros(inputImg.size(), CV_8U);
 	int k = 256;
 	int Fk[5][5] = { {1, 4, 6, 4, 1},
 					{4, 16, 24, 16, 4},
@@ -162,7 +160,7 @@ Mat Filters::sobel(const Mat& inputImg)
 			}
 
 			int sobel_s = sqrt(convy * convy + convx * convx);
-			sobel_s = sobel_s > 255 ? sobel_s = 255 : sobel_s;
+			sobel_s = sobel_s > 255 ? sobel_s = 255 : sobel_s; 
 			outputImg.at<uchar>(j, i) = sobel_s;
 		}
 	}
