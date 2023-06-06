@@ -22,6 +22,7 @@ class Filters
 
 		Mat gauss3(const Mat& inputImg);
 		Mat gauss5(const Mat& inputImg);
+		Mat mosaika(int size, const Mat& inputImg);
 		Mat ac(int depth, const Mat& inputImg);
 		Mat mediana(const Mat& inputImg);
 
