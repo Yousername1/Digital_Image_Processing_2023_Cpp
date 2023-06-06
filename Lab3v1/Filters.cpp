@@ -83,13 +83,34 @@ Mat Filters::ac(int depth, const Mat& inputImg)
 					conv += Fk[ii + 1][jj + 1] * aced;
 				}
 			int aced = conv / k;
-			// uchar aced = conv / k;
 			if (aced > 255)
 				outputImg.at<uchar>(j, i) = 255;
 			else {
 				uchar uaced = aced;
 				outputImg.at<uchar>(j, i) = uaced;
 			}
+		}
+	return outputImg;
+}
+
+Mat Filters::mediana(const Mat& inputImg)
+{
+	Filters::outputImg = Mat::zeros(inputImg.size(), CV_8UC1);
+	Mat blurred = Mat::zeros(1, 9, CV_8U);
+	Mat blurred1 = Mat::zeros(1, 9, CV_8U);
+	for (int i = 1; i < inputImg.cols - 1; i++)
+		for (int j = 1; j < inputImg.rows - 1; j++)
+		{
+			// ????? ?????????? ???????
+			float Rez = 0;
+			for (int ii = -1; ii <= 1; ii++)
+				for (int jj = -1; jj <= 1; jj++)
+				{
+					blurred.at<uchar>(0, (ii + 1) * 3 + jj + 1) = inputImg.at<uchar>(j + jj, i + ii);
+				}
+			cv::sort(blurred, blurred1, SORT_EVERY_ROW);
+			unsigned char Med = blurred1.at<uchar>(0, 4);
+			outputImg.at<uchar>(j, i) = Med;
 		}
 	return outputImg;
 }
