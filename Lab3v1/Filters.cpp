@@ -6,22 +6,20 @@ void Filters::setImg(Mat sourceImg)
 	Filters::workingImg = sourceImg.clone();
 }
 
-
-Mat Filters::getImg() const
+Mat Filters::makeBiImg(Mat inputImg)
 {
-	return Filters::workingImg;
+	cvtColor(inputImg, Filters::biImg, COLOR_BGR2GRAY);
+	return biImg;
 }
 
-Mat Filters::biImg()
+Mat Filters::getImg() 
 {
-	Mat imgGray;
-	cvtColor(getImg(), imgGray, COLOR_BGR2GRAY);
-	return imgGray;
+	return makeBiImg(workingImg);
 }
 
 Mat Filters::gauss3(const Mat& inputImg)
 {
-	Filters::outputImg = Mat::zeros(getImg().size(), CV_8UC1);
+	Filters::outputImg = Mat::zeros(inputImg.size(), CV_8UC1);
 	int k = 36;
 	int Fk[3][3] = { {1,4,1},
 					 {4,16,4},
@@ -44,7 +42,7 @@ Mat Filters::gauss3(const Mat& inputImg)
 
 Mat Filters::gauss5(const Mat& inputImg)
 {
-	Filters::outputImg = Mat::zeros(getImg().size(), CV_8UC1);
+	Filters::outputImg = Mat::zeros(inputImg.size(), CV_8UC1);
 	int k = 256;
 	int Fk[5][5] = { {1, 4, 6, 4, 1},
 					{4, 16, 24, 16, 4},
@@ -63,6 +61,35 @@ Mat Filters::gauss5(const Mat& inputImg)
 				}
 			uchar blurred = Rez / k;
 			outputImg.at<uchar>(j, i) = blurred;
+		}
+	return outputImg;
+}
+
+Mat Filters::ac(int depth, const Mat& inputImg)
+{
+	Filters::outputImg = Mat::zeros(inputImg.size(), CV_8UC1);
+
+	float X = ceil((100 / depth - 1) + 8); //?????????? ? ???????
+
+	float k = X - 8; // ??????????? ??????????
+	float Fk[3][3] = { { -1,-1,-1 },{ -1,X,-1 },{ -1,-1,-1 } };
+
+	for (int i = 1; i < inputImg.cols - 1; i++)
+		for (int j = 1; j < inputImg.rows - 1; j++) {
+			float conv = 0;
+			for (int ii = -1; ii <= 1; ii++)
+				for (int jj = -1; jj <= 1; jj++) {
+					uchar aced = inputImg.at<uchar>(j + jj, i + ii);
+					conv += Fk[ii + 1][jj + 1] * aced;
+				}
+			int aced = conv / k;
+			// uchar aced = conv / k;
+			if (aced > 255)
+				outputImg.at<uchar>(j, i) = 255;
+			else {
+				uchar uaced = aced;
+				outputImg.at<uchar>(j, i) = uaced;
+			}
 		}
 	return outputImg;
 }

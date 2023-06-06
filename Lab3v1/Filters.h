@@ -14,16 +14,18 @@ class Filters
 	public:
 		Mat sourceImg;
 		Mat workingImg;
+		Mat biImg;
 		Mat outputImg;
 
 		void setImg(Mat sourceImg);
-		Mat getImg() const;
+		Mat getImg();
 
 		Mat gauss3(const Mat& inputImg);
 		Mat gauss5(const Mat& inputImg);
+		Mat ac(int depth, const Mat& inputImg);
 
 
 	private:
-		Mat biImg();
+		Mat makeBiImg(Mat inputImg);
 };
 
